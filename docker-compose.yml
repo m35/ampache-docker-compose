@@ -1,0 +1,51 @@
+version: '3.0'
+
+services:
+    ampache-php:
+        build: .
+        volumes:
+            - www-volume:/var/www # share www directory with lighttpd
+            - /media/music:/media
+        networks:
+            - shared-net
+
+    lighttpd:
+        build: ./lighttpd
+        restart: always
+        ports:
+            - "80:80"
+        volumes:
+            - www-volume:/var/www:ro # share www directory with ampache-php
+        networks:
+            - shared-net
+        environment: 
+            PHP_FASTCGI_HOST: "ampache-php" # pass the fastcgi host to lighttpd
+        depends_on: 
+            - ampache-php # need to wait for apache-php to start so we can resolve its hostname
+
+    mysql:
+        image: mysql:5
+        restart: always
+        container_name: ampache-mysql
+        environment:
+            # For testing
+            # MYSQL_ROOT_PASSWORD: "1"
+            MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+        networks:
+            - shared-net
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - 8080:80
+        environment: 
+            PMA_HOST: ampache-mysql
+        networks:
+            - shared-net
+
+volumes:
+    www-volume: 
+
+networks:
+    shared-net:
+        driver: bridge
