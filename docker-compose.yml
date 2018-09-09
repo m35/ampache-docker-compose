@@ -14,6 +14,7 @@ services:
         restart: always
         ports:
             - "80:80"
+            - "1900:1900" # UPnP
         volumes:
             - www-volume:/var/www:ro # share www directory with ampache-php
         networks:

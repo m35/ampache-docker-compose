@@ -80,8 +80,14 @@ RUN chmod -R 754 /usr/lib/lighttpd/*
 
 # Not going to clean up the mess we made getting here until everything is working right
 
-# Expose http(s) ports
+# HTTP, WebDav, SubSonic
 EXPOSE 80
+#UPnP
+EXPOSE 1900
+# DAAP
+EXPOSE 3689
+# Plex
+EXPOSE 32400
 
 # "The server has to be started as root to take control of port 80"
 #USER lighttpd

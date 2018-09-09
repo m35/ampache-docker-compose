@@ -7,28 +7,28 @@ This one tries to follow the Docker best practice of a single process per contai
 
 Put your music in `/media/music`.
 
-In the directory of this project, run
+1. In the directory of this project, run
 ```
 docker-compose up -d
 ```
 
-The MySQL root password is randomly generated and can be found in the Docker logs.
+2. The MySQL root password is randomly generated and can be found in the Docker logs.
 
 To quickly locate it, run this
 ```
 docker logs ampache-mysql 2>&1 | grep "GENERATED ROOT PASSWORD"
 ```
 
-Browse to the installed Ampache homepage (e.g. `http://localhost`).
+3. Browse to the installed Ampache homepage (e.g. `http://localhost`).
 
-Begin the Ampache installation process.
-For MySQL Hostname use `ampache-mysql`.
-For MySQL Administrative Password use the password from above.
-Create database
-Create tables
-Create user
+4. Begin the Ampache installation process.
+5. For MySQL Hostname use `ampache-mysql`.
+6. For MySQL Administrative Password use the password from above.
+7. Create database
+8. Create tables
+9. Create user
 
-Add a music catalog at path `/music` (which maps to your local directory `/media/music`).
+10. Add a music catalog at path `/music` (which maps to your local directory `/media/music`).
 
 ## Configuration
 
@@ -44,7 +44,7 @@ In the future, these could be made as parameters or environment variables (maybe
 The default url path to Ampache is `/`. I would like to make that configurable, but existing webservers make that painful.
 
 There are additional settings used by the MySQL service
-that can be found under 'Environment Variables' on the MySQL Docker page https://hub.Docker.com/_/mysql/
+that can be found under 'Environment Variables' on the MySQL Docker page https://hub.Docker.com/_/mysql/.
 
 There are also settings you may want to manually change in the Ampache config/ampache.cfg.php
 
